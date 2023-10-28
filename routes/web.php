@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
 
-
 Route::get('/search', [SearchController::class, 'show'])->name('search.show');
 
 Route::middleware('auth')->group(function () {

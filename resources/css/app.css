@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.imageHover:hover{
+    transition: all 0.15s ease-in-out;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #fff;
+    box-sizing: border-box;
+    border-radius: 17px;
+}
+
 .custom-prev {
     font-size: 24px;
     background-color: rgba(0, 0, 0, 0.5);
-    margin-left: 3px;
+    margin-left: 10px;
     padding: 10px 20px;
     border-radius: 50%;
     color: #fff;
@@ -32,7 +40,7 @@
     font-size: 24px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
-    margin-right: 3px;
+    margin-right: 10px;
     border-radius: 50%;
     color: #fff;
     position: absolute;

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Tmdb\Client;
 use Tmdb\Helper\ImageHelper;
 use Tmdb\Repository\MovieRepository;
+use Tmdb\Repository\TvRepository;
 
 class HomeController extends Controller
 {
@@ -18,9 +19,12 @@ class HomeController extends Controller
 
     public function show(Client $client)
     {
-        $repository = new MovieRepository($client);
-        $popular = $repository->getPopular();
-
-        return view('home', ['movies' => $popular, 'imageHelper' => $this->imageHelper]);
+        $MVrepository = new MovieRepository($client);
+        $TVrepository = new TVrepository($client);
+        $popularMV = $MVrepository->getPopular();
+        $topRatedMV = $MVrepository->getTopRated();
+        $popularTV = $TVrepository->getPopular();
+        $topRatedTV = $TVrepository->getTopRated();
+        return view('home', ['popularMV' => $popularMV, 'topRatedMV' => $topRatedMV, 'popularTV' => $popularTV, 'topRatedTV' => $topRatedTV, 'imageHelper' => $this->imageHelper]);
     }
 }
