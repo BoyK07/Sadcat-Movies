@@ -14,5 +14,10 @@
         "postcss": "^8.4.6",
         "tailwindcss": "^3.1.0",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@tailwindcss/aspect-ratio": "^0.4.2",
+        "owl.carousel": "^2.3.4",
+        "swiper": "^11.0.3"
     }
 }
