@@ -13,7 +13,6 @@
                         </div>
                     </x-nav-link>
                     <x-nav-link :href="route('search.show')" :active="request()->routeIs('search.show')">
-                        {{-- TODO - Search button --}}
                         <div>
                             <i class="fa-solid fa-magnifying-glass mr-2" style="color: #ffffff;"></i>
                             {{ __('Search') }}
@@ -25,13 +24,11 @@
             <!-- Account Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (Auth::user() != null)
-                <i class="fa-regular fa-user" style="color: #ffffff;"></i>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <i class="fa-regular fa-user" style="color: #ffffff;"></i>
+                            <button class="inline-flex items-center py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                 <div>{{ Auth::user()->name }}</div> 
-                                {{-- else login / register --}}
-                            
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -58,10 +55,10 @@
                         </x-slot>
                     </x-dropdown>
                 @else
-                <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <i class="fa-solid fa-right-to-bracket p-2" style="color: #ffffff;"></i>
                                 <div>Account</div> 
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -100,8 +97,18 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                <i class="fa-solid fa-house mr-2"></i>
                 {{ __('Home') }}
             </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-nav-link :href="route('search.show')" :active="request()->routeIs('search.show')">
+                <div>
+                    {{-- TODO Fix positioning --}}
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                    {{ __('Search') }}
+                </div>
+            </x-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
