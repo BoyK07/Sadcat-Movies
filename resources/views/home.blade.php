@@ -8,7 +8,7 @@
                         <div class="owl-carousel">
                             @foreach ($popularMV as $movie)
                                 <div class="item p-1">
-                                    <a href="#">
+                                    <a href="{{route('mv.info', $movie->getId())}}">
                                         <img src="{{ $imageHelper->getUrl($movie->getPosterImage(), 'w400') }}" alt="Movie Poster" class="rounded-md shadow-lg imageHover">
                                     </a>
                                 </div>
@@ -21,7 +21,7 @@
                         <div class="owl-carousel">
                             @foreach ($topRatedMV as $movie)
                                 <div class="item p-1">
-                                    <a href="#">
+                                    <a href="{{route('mv.info', $movie->getId())}}">
                                         <img src="{{ $imageHelper->getUrl($movie->getPosterImage(), 'w400') }}" alt="Movie Poster" class="rounded-md shadow-lg imageHover">
                                     </a>
                                 </div>
@@ -34,7 +34,7 @@
                         <div class="owl-carousel">
                             @foreach ($popularTV as $tv)
                                 <div class="item p-1">
-                                    <a href="#">
+                                    <a href="{{route('tv.info', $tv->getId())}}">
                                         <img src="{{ $imageHelper->getUrl($tv->getPosterImage(), 'w400') }}" alt="tv Poster" class="rounded-md shadow-lg imageHover">
                                     </a>
                                 </div>
@@ -47,7 +47,7 @@
                         <div class="owl-carousel">
                             @foreach ($topRatedTV as $tv)
                                 <div class="item p-1">
-                                    <a href="#">
+                                    <a href="{{route('tv.info', $tv->getId())}}">
                                         <img src="{{ $imageHelper->getUrl($tv->getPosterImage(), 'w400') }}" alt="tv Poster" class="rounded-md shadow-lg imageHover">
                                     </a>
                                 </div>
