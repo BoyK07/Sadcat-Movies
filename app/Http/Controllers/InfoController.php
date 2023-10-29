@@ -16,14 +16,10 @@ class InfoController extends Controller
         $this->imageHelper = $imageHelper;
     }
 
-    public function showMV(Request $request, Client $client){
-        $id = $request->id;
-        if (!isset($id)){
-            return redirect()->route('home');
-        }
-        $repository = new MovieRepository($client);
+    private function gatherData($repository, $id) {
         $description = $repository->load($id)->getOverview();
         $release = $repository->load($id)->getReleaseDate()->format('Y');
+        $suggested = $repository->getSimilar($id);
         
         $genresArray = ($repository->load($id)->getGenres())->toArray();
         $genres = [];
@@ -32,18 +28,18 @@ class InfoController extends Controller
                 $genres[] = $genre->getName();
             }
         }
-
+    
         $image = $repository->getImages($id);
         $logo = null;
         $backimage = null;
-
+    
         foreach ($image as $img) {
             if ($img instanceof \Tmdb\Model\Image\LogoImage && $img->getIso6391() === 'en') {
                 $logo = $img->getFilePath();
                 break;
             }
         }
-
+    
         if (!$logo) {
             foreach ($image as $img) {
                 if ($img instanceof \Tmdb\Model\Image\LogoImage) {
@@ -52,23 +48,42 @@ class InfoController extends Controller
                 }
             }
         }
-
+    
         if (!$backimage) {
             foreach ($image as $img) {
                 $backimage = $img->getFilePath();
                 break;
             }
         }
-
-        return view('info')->with(compact('description', 'backimage', 'logo', 'release', 'genres'));
+    
+        return [
+            'logo' => $logo, 
+            'backimage' => $backimage, 
+            'description' => $description, 
+            'release' => $release, 
+            'genres' => $genres, 
+            'suggested' => $suggested, 
+            'imageHelper' => $this->imageHelper
+        ];
     }
 
+    public function showMV(Request $request, Client $client){
+        $id = $request->id;
+        if (!isset($id)){
+            return redirect()->route('home');
+        }
+        $repository = new MovieRepository($client);
+        $data = $this->gatherData($repository, $id);
+        return view('info.movie', $data);
+    }
+    
     public function showTV(Request $request, Client $client){
         $id = $request->id;
         if (!isset($id)){
             return redirect()->route('home');
         }
-        $info = null;
-        return view('info')->with('info', $info);
+        $repository = new MovieRepository($client);
+        $data = $this->gatherData($repository, $id);
+        return view('info.show', $data);
     }
 }
