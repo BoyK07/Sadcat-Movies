@@ -2,12 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.description {
+    max-height: 300px;  /* Adjust based on your needs */
+    overflow-y: auto;
+}
+
 .imageHover:hover{
     transition: all 0.15s ease-in-out;
     transform: scale(1.02);
     box-shadow: 0 0 10px #fff;
     box-sizing: border-box;
     border-radius: 17px;
+}
+
+.carousel-container {
+    z-index: 20;  /* Adjust as needed */
+    overflow: hidden;
 }
 
 .custom-prev {
@@ -61,4 +71,8 @@
     top: 50%;
     transform: translateY(-50%);
     transition: all 0.25s ease-in-out;
+}
+
+.padding-container {
+    padding: 0 2rem;
 }
