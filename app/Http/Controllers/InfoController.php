@@ -67,13 +67,10 @@ class InfoController extends Controller
         $duration = null;
         if ($indicator == "mv") {
             $duration = $repository->load($id)->getRuntime();
-        } else {
-            $duration = $repository->load($id)->getEpisodeRunTime();
-        } if ($duration) {
             $hours = floor($duration / 60);
             $minutes = $duration % 60;
             $duration = ($hours > 0 ? $hours . ' h ' : '') . $minutes . ' min';
-        }
+        } 
 
         return [
             'id' => $id,
