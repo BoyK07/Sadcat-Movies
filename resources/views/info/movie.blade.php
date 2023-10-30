@@ -1,6 +1,5 @@
 <x-app-layout>
-    <div class="relative bg-[#191928] opacity-100 overflow-x-hidden" style="height: calc(100vh - 66px); width: 100%;">
-        <img src="https://image.tmdb.org/t/p/original{{ $backimage }}" alt="Background Image" class="absolute inset-0 w-full h-full object-cover">
+    <div class="relative bg-[#191928] opacity-100 overflow-x-hidden" style="height: calc(100vh - 66px); width: 100%; background-image: url('https://image.tmdb.org/t/p/original{{ $backimage }}'); background-size: cover; background-position: center; background-attachment: fixed;">
         
         <!-- Dark Overlay -->
         <div class="absolute inset-0 bg-black opacity-40"></div>
@@ -36,25 +35,24 @@
                             <span>Play</span>
                         </div>
                     </a>
-
+                    
                     <h1 class="text-2xl font-bold border-violet-700 w-fit border-b-4">Suggested</h1>
                     <div class="border-b-4 border-gray-700 mb-2"></div>
                     <!-- Carousel Container -->
                     <div class="carousel-container relative overflow-hidden">
-                    <div class="owl-carousel">
-                        @foreach ($suggested as $suggestion)
-                        <div class="item">
-                            <a href="{{route('mv.info', $suggestion->getId())}}">
-                                <img src="{{ $imageHelper->getUrl($suggestion->getPosterImage(), 'w400') }}" alt="Movie Poster" class="rounded-md shadow-lg imageHover max-w-full h-auto">
-                            </a>
-                        </div>
-                        @endforeach
-                    </div>  
-                </div>
+                        <div class="owl-carousel">
+                            @foreach ($suggested as $suggestion)
+                            <div class="item">
+                                <a href="{{route('mv.info', $suggestion->getId())}}">
+                                    <img src="{{ $imageHelper->getUrl($suggestion->getPosterImage(), 'w400') }}" alt="Movie Poster" class="rounded-md shadow-lg imageHover max-w-full h-auto">
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>  
+                    </div>
                 
+                </div>
             </div>
-            
-            
         </div>
     </div>
 </x-app-layout>

@@ -15,6 +15,18 @@
     border-radius: 17px;
 }
 
+.hidden {
+    display: none;
+}
+
+.active-section {
+    border-bottom: 4px solid rgb(109 40 217);
+}
+
+.hover-mouse:hover{
+    cursor: pointer;
+}
+
 .carousel-container {
     z-index: 20;  /* Adjust as needed */
     overflow: hidden;
