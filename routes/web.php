@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
+
 Route::get('/search', [SearchController::class, 'show'])->name('search.show');
+Route::post('/search', [SearchController::class, 'search'])->name('search.search');
 
 Route::get('/movie', [HomeController::class, 'redirect']);
 Route::get('/show', [HomeController::class, 'redirect']);
