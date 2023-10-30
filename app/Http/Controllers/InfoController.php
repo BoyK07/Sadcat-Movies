@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Tmdb\Client;
 use Tmdb\Helper\ImageHelper;
 use Tmdb\Repository\MovieRepository;
+use Tmdb\Repository\TvRepository;
+use Tmdb\Repository\TvSeasonRepository;
+
 
 class InfoController extends Controller
 {
@@ -16,11 +19,17 @@ class InfoController extends Controller
         $this->imageHelper = $imageHelper;
     }
 
-    private function gatherData($repository, $id) {
+    private function gatherData($repository, $tvSrepo=null, $id, $indicator, $client)
+    {
         $description = $repository->load($id)->getOverview();
-        $release = $repository->load($id)->getReleaseDate()->format('Y');
+        $seasons = null;
+        if ($indicator == "mv") {
+            $release = $repository->load($id)->getReleaseDate()->format('Y');
+        } else {
+            $release = $repository->load($id)->getFirstAirDate()->format('Y');
+            $seasons = $repository->load($id)->getSeasons();
+        }
         $suggested = $repository->getSimilar($id);
-        
         $genresArray = ($repository->load($id)->getGenres())->toArray();
         $genres = [];
         foreach ($genresArray as $genre) {
@@ -28,18 +37,17 @@ class InfoController extends Controller
                 $genres[] = $genre->getName();
             }
         }
-    
         $image = $repository->getImages($id);
         $logo = null;
         $backimage = null;
-    
+
         foreach ($image as $img) {
             if ($img instanceof \Tmdb\Model\Image\LogoImage && $img->getIso6391() === 'en') {
                 $logo = $img->getFilePath();
                 break;
             }
         }
-    
+
         if (!$logo) {
             foreach ($image as $img) {
                 if ($img instanceof \Tmdb\Model\Image\LogoImage) {
@@ -48,42 +56,50 @@ class InfoController extends Controller
                 }
             }
         }
-    
+
         if (!$backimage) {
             foreach ($image as $img) {
                 $backimage = $img->getFilePath();
                 break;
             }
         }
-    
+
         return [
-            'logo' => $logo, 
-            'backimage' => $backimage, 
-            'description' => $description, 
-            'release' => $release, 
-            'genres' => $genres, 
-            'suggested' => $suggested, 
-            'imageHelper' => $this->imageHelper
+            'id' => $id,
+            'logo' => $logo,
+            'backimage' => $backimage,
+            'description' => $description,
+            'release' => $release,
+            'genres' => $genres,
+            'suggested' => $suggested,
+            'seasons' => $seasons,
+            'imageHelper' => $this->imageHelper,
+            'tvsrepo' => $tvSrepo
         ];
     }
 
-    public function showMV(Request $request, Client $client){
+    public function showMV(Request $request, Client $client)
+    {
         $id = $request->id;
-        if (!isset($id)){
+        if (!isset($id)) {
             return redirect()->route('home');
         }
         $repository = new MovieRepository($client);
-        $data = $this->gatherData($repository, $id);
+        $indicator = "mv";
+        $data = $this->gatherData($repository, null, $id, $indicator, $client);
         return view('info.movie', $data);
     }
-    
-    public function showTV(Request $request, Client $client){
+
+    public function showTV(Request $request, Client $client)
+    {
         $id = $request->id;
-        if (!isset($id)){
+        if (!isset($id)) {
             return redirect()->route('home');
         }
-        $repository = new MovieRepository($client);
-        $data = $this->gatherData($repository, $id);
+        $repository = new TvRepository($client);
+        $tvSrepo = new TvSeasonRepository($client);
+        $indicator = "tv";
+        $data = $this->gatherData($repository, $tvSrepo, $id, $indicator, $client);
         return view('info.show', $data);
     }
 }
