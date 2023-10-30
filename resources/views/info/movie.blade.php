@@ -24,7 +24,7 @@
                             @endforeach
                         </div>
                         <!-- Release Box -->
-                        <p><span>{{ $release }}</span><span class="pl-2 pr-2">•</span><span>DURATION</span></p>
+                        <p><span>{{ $release }}</span><span class="pl-2 pr-2">•</span><span>{{$duration}}</span></p>
                     </div>
                     
                     <p class="mt-3 font-bold" style="max-width: 750px;">{{$description}}</p>
