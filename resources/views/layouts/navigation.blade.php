@@ -24,6 +24,12 @@
             <!-- Account Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (Auth::user() != null)
+                    <x-nav-link class="mr-4" :href="route('watchlist.show')" :active="request()->routeIs('watchlist.show')">
+                        <div>
+                            <i class="fa-solid fa-bookmark mr-1" style="color: #ffffff;"></i>
+                            {{ __('Watchlist') }}
+                        </div>
+                    </x-nav-link>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <i class="fa-regular fa-user" style="color: #ffffff;"></i>
@@ -111,6 +117,10 @@
 
             @if (Auth::user() != null)
                 <div class="mt-2 space-y-1">
+                    <x-responsive-nav-link :href="route('watchlist.show')">
+                        {{ __('Watchlist') }}
+                    </x-responsive-nav-link>
+
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>

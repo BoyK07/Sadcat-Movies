@@ -12,6 +12,8 @@ class Watchlist extends Model
         'user_id',
         'title',
         'type',
+        'imageurl',
+        'logo_url',
         'tmdb_id'
     ];
 

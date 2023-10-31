@@ -18,6 +18,7 @@ Route::get('/show', [HomeController::class, 'redirect']);
 Route::get('/movie/{id}', [InfoController::class, 'showMV'])->name('mv.info');
 Route::get('/show/{id}', [InfoController::class, 'showTV'])->name('tv.info');
 
+Route::get('/watchlist', [WatchlistController::class, 'show'])->name('watchlist.show');
 Route::post('/watchlist/add', [WatchlistController::class, 'add'])->name('watchlist.add');
 Route::post('/watchlist/remove', [WatchlistController::class, 'remove'])->name('watchlist.remove');
 

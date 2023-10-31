@@ -18,9 +18,7 @@
                         {{-- Genres --}}
                         <div>
                             @foreach ($genres as $genre)
-                            <a href="#">
-                                <span class="inline-block bg-gray-700 text-white px-2 rounded-md mr-1 mb-1">{{ $genre }}</span>
-                            </a>
+                            <span class="inline-block bg-gray-700 text-white px-2 rounded-md mr-1 mb-1">{{ $genre }}</span>
                             @endforeach
                         </div>
                         <!-- Release Box -->
@@ -37,13 +35,15 @@
                                 <span>Play</span>
                             </div>
                         </a>
-                        <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                             @if (Auth::user() != null)
-                                @if (!$isInWatchlist)
+                            <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
+                            @if (!$isInWatchlist)
                                 <form action="{{ route('watchlist.add') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="title" value="{{ $title }}">
                                     <input type="hidden" name="type" value="mv">
+                                    <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
+                                    <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
                             
                                     <button type="submit" class="flex items-center">
@@ -56,6 +56,8 @@
                                     @csrf
                                     <input type="hidden" name="title" value="{{ $title }}">
                                     <input type="hidden" name="type" value="mv">
+                                    <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
+                                    <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
                             
                                     <button type="submit" class="flex items-center">
@@ -64,8 +66,8 @@
                                     </button>
                                 </form>
                                 @endif
+                            </div>
                             @endif
-                        </div>
                     </div>
                         
                     <h1 class="text-2xl font-bold border-violet-700 w-fit border-b-4">Suggested</h1>

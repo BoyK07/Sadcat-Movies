@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         wrapper.appendChild(img);
         
         img.addEventListener('error', function() {
-            this.src = '/storage/images/defaultimage.png';
+            this.src = '/storage/images/imagenotfound.png';
         });
     });
 });
