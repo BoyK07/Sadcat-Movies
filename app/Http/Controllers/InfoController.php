@@ -8,6 +8,9 @@ use Tmdb\Helper\ImageHelper;
 use Tmdb\Repository\MovieRepository;
 use Tmdb\Repository\TvRepository;
 use Tmdb\Repository\TvSeasonRepository;
+use App\Models\Watchlist;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class InfoController extends Controller
@@ -25,9 +28,11 @@ class InfoController extends Controller
         $seasons = null;
         if ($indicator == "mv") {
             $release = $repository->load($id)->getReleaseDate()->format('Y');
+            $title = $repository->load($id)->getTitle();
         } else {
             $release = $repository->load($id)->getFirstAirDate()->format('Y');
             $seasons = $repository->load($id)->getSeasons();
+            $title = $repository->load($id)->getName();
         }
         $suggested = $repository->getSimilar($id);
         $genresArray = ($repository->load($id)->getGenres())->toArray();
@@ -72,8 +77,15 @@ class InfoController extends Controller
             $duration = ($hours > 0 ? $hours . ' h ' : '') . $minutes . ' min';
         } 
 
+        $userId = Auth::id();
+        $isInWatchlist = Watchlist::where('user_id', $userId)
+                                ->where('tmdb_id', $id)
+                                ->exists();
+        $isInWatchlist = $isInWatchlist ? true : false;
+
         return [
             'id' => $id,
+            'title' => $title,
             'logo' => $logo,
             'backimage' => $backimage,
             'description' => $description,
@@ -83,7 +95,8 @@ class InfoController extends Controller
             'suggested' => $suggested,
             'seasons' => $seasons,
             'imageHelper' => $this->imageHelper,
-            'tvsrepo' => $tvSrepo
+            'tvsrepo' => $tvSrepo,
+            'isInWatchlist' => $isInWatchlist,
         ];
     }
 

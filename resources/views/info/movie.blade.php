@@ -3,7 +3,7 @@
         
         <!-- Dark Overlay -->
         <div class="absolute inset-0 bg-black opacity-40"></div>
-        
+            
         <!-- Main Content Container -->
         <div class="absolute z-10 top-20 text-white w-full padding-container flex flex-col h-full" style="max-height: calc(100% - 120px);">
             
@@ -12,7 +12,7 @@
                 
                 <!-- Overlay Text -->
                 <div class="space-y-3">
-                    <img src="https://image.tmdb.org/t/p/original{{ $logo }}" draggable="false" alt="Logo Image" class="w-1/8 h-auto mb-4" style="max-height: 300px; max-width: 500px;"> 
+                    <img src="https://image.tmdb.org/t/p/original{{ $logo }}" draggable="false" alt="Logo Image" class="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 h-auto mb-4 max-h-[300px] max-w-[500px]">
                     
                     <div class="flex space-x-4 items-center">
                         {{-- Genres --}}
@@ -29,13 +29,45 @@
                     
                     <p class="mt-3 font-bold" style="max-width: 750px;">{{$description}}</p>
                     {{-- TODO! Play button --}}
-                    <a href="#">
-                        <div class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
-                            <i class="fa-solid fa-play pr-3"></i>
-                            <span>Play</span>
+                    {{-- Play button --}}
+                    <div class="flex item-center">
+                        <a href="#">
+                            <div class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
+                                <i class="fa-solid fa-play pr-3"></i>
+                                <span>Play</span>
+                            </div>
+                        </a>
+                        <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
+                            @if (Auth::user() != null)
+                                @if (!$isInWatchlist)
+                                <form action="{{ route('watchlist.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="title" value="{{ $title }}">
+                                    <input type="hidden" name="type" value="mv">
+                                    <input type="hidden" name="tmdb_id" value="{{ $id }}">
+                            
+                                    <button type="submit" class="flex items-center">
+                                        <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
+                                        <span class="pl-3">Add to watchlist</span>
+                                    </button>
+                                </form>
+                                @else
+                                <form action="{{ route('watchlist.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="title" value="{{ $title }}">
+                                    <input type="hidden" name="type" value="mv">
+                                    <input type="hidden" name="tmdb_id" value="{{ $id }}">
+                            
+                                    <button type="submit" class="flex items-center">
+                                        <i class="fa-solid fa-check"></i>
+                                        <span class="pl-3">Added to watchlist</span>
+                                    </button>
+                                </form>
+                                @endif
+                            @endif
                         </div>
-                    </a>
-                    
+                    </div>
+                        
                     <h1 class="text-2xl font-bold border-violet-700 w-fit border-b-4">Suggested</h1>
                     <div class="border-b-4 border-gray-700 mb-2"></div>
                     <!-- Carousel Container -->
@@ -50,7 +82,6 @@
                             @endforeach
                         </div>  
                     </div>
-                
                 </div>
             </div>
         </div>
