@@ -4,6 +4,26 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        // Create a wrapper for the image
+        const wrapper = document.createElement('div');
+        wrapper.className = 'aspect-3-2';
+
+        // Replace the image with the wrapper in the DOM
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+        
+        img.addEventListener('error', function() {
+            this.src = '/storage/images/defaultimage.png';
+        });
+    });
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     setupOwlCarousel();
     setupEpisodesCarousel();
