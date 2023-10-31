@@ -18,6 +18,11 @@
                             {{ __('Search') }}
                         </div>
                     </x-nav-link>
+                    <x-nav-link :href="route('sadcat.space')">
+                        <div class="flex items-center justify-center">
+                            &copy;{{ __(' Sadcat  |  2023 - now')}}
+                        </div>
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -46,6 +51,10 @@
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('history.show')">
+                                {{ __('History') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
