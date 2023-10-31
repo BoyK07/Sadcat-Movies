@@ -22,7 +22,29 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Check if the toast exists on page load
+    const successToast = document.getElementById('toast-success');
+    const dangerToast = document.getElementById('toast-danger');
+    
+    // If the toast exists, display it and hide it after 5 seconds
+    if (successToast) {
+        showAndHideToast(successToast);
+    }
 
+    if (dangerToast) {
+        showAndHideToast(dangerToast);
+    }
+
+    function showAndHideToast(toastElement) {
+        setTimeout(() => {
+            toastElement.classList.add('toast-show');
+            setTimeout(() => {
+                toastElement.classList.remove('toast-show');
+            }, 5000);
+        }, 100);
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     setupOwlCarousel();

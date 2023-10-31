@@ -100,15 +100,10 @@
                 <i class="fa-solid fa-house mr-2"></i>
                 {{ __('Home') }}
             </x-responsive-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-nav-link :href="route('search.show')" :active="request()->routeIs('search.show')">
-                <div>
-                    {{-- TODO Fix positioning --}}
+            <x-responsive-nav-link :href="route('search.show')" :active="request()->routeIs('search.show')">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i>
                     {{ __('Search') }}
-                </div>
-            </x-nav-link>
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
