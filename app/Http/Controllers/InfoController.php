@@ -7,9 +7,9 @@ use Tmdb\Client;
 use Tmdb\Helper\ImageHelper;
 use Tmdb\Repository\MovieRepository;
 use Tmdb\Repository\TvRepository;
-use Tmdb\Repository\TvSeasonRepository;
 use App\Models\Watchlist;
 use Illuminate\Support\Facades\Auth;
+use Tmdb\Repository\TvSeasonRepository;
 
 
 
@@ -96,7 +96,7 @@ class InfoController extends Controller
             'seasons' => $seasons,
             'imageHelper' => $this->imageHelper,
             'tvsrepo' => $tvSrepo,
-            'isInWatchlist' => $isInWatchlist,
+            'isInWatchlist' => $isInWatchlist
         ];
     }
 
@@ -109,6 +109,8 @@ class InfoController extends Controller
         $repository = new MovieRepository($client);
         $indicator = "mv";
         $data = $this->gatherData($repository, null, $id, $indicator, $client);
+        $data['episodes_count'] = null;
+        $data['seasons_count'] = null;
         return view('info.movie', $data);
     }
 
@@ -121,7 +123,11 @@ class InfoController extends Controller
         $repository = new TvRepository($client);
         $tvSrepo = new TvSeasonRepository($client);
         $indicator = "tv";
+        $episodes_count = $repository->load($id)->getNumberOfEpisodes();
+        $seasons_count = $repository->load($id)->getNumberOfSeasons();
         $data = $this->gatherData($repository, $tvSrepo, $id, $indicator, $client);
+        $data['episodes_count'] = $episodes_count;
+        $data['seasons_count'] = $seasons_count;
         return view('info.show', $data);
     }
 }
