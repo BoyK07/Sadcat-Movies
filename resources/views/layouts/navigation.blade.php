@@ -18,7 +18,7 @@
                             {{ __('Search') }}
                         </div>
                     </x-nav-link>
-                    <x-nav-link :href="route('sadcat.space')">
+                    <x-nav-link :href="route('sadcat.space')" target="_blank">
                         <div class="flex items-center justify-center">
                             &copy;{{ __(' Sadcat  |  2023 - now')}}
                         </div>
@@ -126,14 +126,18 @@
 
             @if (Auth::user() != null)
                 <div class="mt-2 space-y-1">
-                    <x-responsive-nav-link :href="route('watchlist.show')">
-                        {{ __('Watchlist') }}
-                    </x-responsive-nav-link>
-
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
                     
+                    <x-responsive-nav-link :href="route('watchlist.show')">
+                        {{ __('Watchlist') }}
+                    </x-responsive-nav-link>
+
+                    <x-dropdown-link :href="route('history.show')">
+                        {{ __('History') }}
+                    </x-dropdown-link>
+
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

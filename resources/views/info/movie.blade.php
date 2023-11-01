@@ -18,7 +18,7 @@
                         {{-- Genres --}}
                         <div>
                             @foreach ($genres as $genre)
-                            <span class="inline-block bg-gray-700 text-white px-2 rounded-md mr-1 mb-1">{{ $genre }}</span>
+                                <span class="inline-block bg-gray-700 text-white px-2 rounded-md mr-1 mb-1">{{ $genre }}</span>
                             @endforeach
                         </div>
                         <!-- Release Box -->
@@ -26,15 +26,19 @@
                     </div>
                     
                     <p class="mt-3 font-bold" style="max-width: 750px;">{{$description}}</p>
-                    {{-- TODO! Play button --}}
                     {{-- Play button --}}
                     <div class="flex item-center">
-                        <a href="#">
-                            <div class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
-                                <i class="fa-solid fa-play pr-3"></i>
-                                <span>Play</span>
-                            </div>
-                        </a>
+                        <form action="{{ route('player.add', $id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="title" value="{{ $title }}">
+                            <input type="hidden" name="type" value="mv">
+                            <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
+                            <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
+                            <button type="submit" class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
+                                <span><i class="fa-solid fa-play pr-2"></i>Play</span>
+                            </button>
+                        </form>
+
                             @if (Auth::user() != null)
                             <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                             @if (!$isInWatchlist)
@@ -45,7 +49,6 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                            
                                     <button type="submit" class="flex items-center">
                                         <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
                                         <span class="pl-3">Add to watchlist</span>
@@ -59,7 +62,6 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                            
                                     <button type="submit" class="flex items-center">
                                         <i class="fa-solid fa-check"></i>
                                         <span class="pl-3">Added to watchlist</span>

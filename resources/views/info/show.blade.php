@@ -28,12 +28,19 @@
                     <p class="mt-3 font-bold" style="max-width: 750px;">{{$description}}</p>
                     {{-- Play button --}}
                     <div class="flex item-center">
-                        <a href="#">
-                            <div class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
-                                <i class="fa-solid fa-play pr-3"></i>
-                                <span>Play</span>
-                            </div>
-                        </a>
+                        <form action="{{ route('player.add', $id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="title" value="{{ $title }}">
+                            <input type="hidden" name="type" value="tv">
+                            <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
+                            <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
+                            <input type="hidden" name="episodes_count" value="{{ $episodes_count }}">
+                            <input type="hidden" name="seasons_count" value="{{ $seasons_count }}">
+                            <button type="submit" class="inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
+                                <span><i class="fa-solid fa-play pr-2"></i>Play</span>
+                            </button>
+                        </form>
+                        
                         @if (Auth::user() != null)
                             <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                                 @if (!$isInWatchlist)
@@ -44,7 +51,6 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                            
                                     <button type="submit" class="flex items-center">
                                         <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
                                         <span class="pl-3">Add to watchlist</span>
@@ -58,7 +64,6 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                            
                                     <button type="submit" class="flex items-center">
                                         <i class="fa-solid fa-check"></i>
                                         <span class="pl-3">Added to watchlist</span>
@@ -97,10 +102,22 @@
                                         <div class="episodes grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-5" data-episodes-for="{{ $i }}">
                                             @foreach ($tvsrepo->load($id, $i)->getEpisodes() as $episode)
                                                 @php $j++; @endphp
-                                                <a href="#">
-                                                    <img src="https://image.tmdb.org/t/p/w300{{$episode->getStillImage()}}" alt="{{$episode->getName()}}" class="rounded-md hover imageHover">
-                                                    <span>{{$j}}. {{$episode->getName()}}</span>
-                                                </a>
+                                                <form action="{{ route('player.add', $id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="title" value="{{ $episode->getName() }}">
+                                                    <input type="hidden" name="type" value="tv">
+                                                    <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$episode->getStillImage()}}">
+                                                    <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
+                                                    <input type="hidden" name="tmdb_id" value="{{ $id }}">
+                                                    <input type="hidden" name="season" value="{{ $i }}">
+                                                    <input type="hidden" name="episode" value="{{ $j }}">
+                                                    <button type="submit">
+                                                        <img src="https://image.tmdb.org/t/p/w300{{$episode->getStillImage()}}" alt="{{$episode->getName()}}" class="rounded-md hover imageHover">
+                                                        <div class="text-left">
+                                                            <span>{{$j}}. {{$episode->getName()}}</span>
+                                                        </div>
+                                                    </button>
+                                                </form>
                                             @endforeach
                                         </div>
                                     @endif
