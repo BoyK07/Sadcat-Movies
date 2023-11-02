@@ -25,9 +25,9 @@ Sadcat Movies is an platform for all movies and TV shows. Built on the Laravel f
 3. Set up your `.env` file
 4. Run `php artisan serve`
 
-### Player Branch
+### Streamer Branch
 
-1. Clone the repository and switch to the "player" branch:`git clone -b player https://github.com/BoyK07/Sadcat-Movies`
+1. Clone the repository and switch to the "streamer" branch:`git clone -b streamer https://github.com/BoyK07/Sadcat-Movies`
 2. Run `composer install`
 3. Set up your `.env` file
 4. Run `php artisan serve`
