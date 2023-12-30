@@ -40,7 +40,10 @@
                                 <span><i class="fa-solid fa-play pr-2"></i>Play</span>
                             </button>
                         </form>
+<<<<<<< Updated upstream
                         
+=======
+>>>>>>> Stashed changes
                         @if (Auth::user() != null)
                             <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                                 @if (!$isInWatchlist)
@@ -51,6 +54,10 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                                     <button type="submit" class="flex items-center">
                                         <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
                                         <span class="pl-3">Add to watchlist</span>
@@ -64,6 +71,10 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                                     <button type="submit" class="flex items-center">
                                         <i class="fa-solid fa-check"></i>
                                         <span class="pl-3">Added to watchlist</span>
@@ -72,13 +83,19 @@
                                 @endif
                             </div>
                         @endif
-                    </div>                    
+                        <a class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold"
+                            href="https://bitsearch.to/search?q={{ str_replace(' ', '+', $title) }}"
+                            target="_blank">
+                                <i class="fa-solid fa-download"></i>
+                                <span class="pl-3">Download</span>
+                            </a>
+                    </div>
 
                     <div class="flex items-center border-b-4 border-gray-700 mb-2">
                         <h1 class="text-2xl font-bold w-fit toggle-section active-section hover-mouse" id="episode-header">Episodes</h1>
                         <h1 class="text-2xl ml-10 font-bold w-fit toggle-section hover-mouse" id="suggestion-header">Suggestions</h1>
                     </div>
-                    
+
                     <div class="flex flex-col">
                         <div class="absolute items-center section-content" id="episode-content">
                             <!-- Seasons (Fixed Position at Top) -->
@@ -93,7 +110,7 @@
                                     @endif
                                 @endforeach
                             </div>
-                                            
+
                             <div class="episodes-container mt-4 overflow-y-auto">
                                 @php $i = 0; @endphp
                                 @foreach ($seasons as $season)
@@ -124,8 +141,8 @@
                                 @endforeach
                             </div>
                         </div>
-                    
-            
+
+
                     <div class="suggestion-container section-content hidden" id="suggestion-content">
                         <div class="carousel-container relative overflow-hidden">
                             <div class="owl-carousel">
@@ -136,11 +153,11 @@
                                     </a>
                                 </div>
                                 @endforeach
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout> 
+</x-app-layout>
