@@ -26,13 +26,7 @@
                     </div>
 
                     <p class="mt-3 font-bold" style="max-width: 750px;">{{$description}}</p>
-<<<<<<< Updated upstream
-                    {{-- Play button --}}
                     <div class="flex item-center">
-=======
-                    <div class="flex item-center">
-                        {{-- Play button --}}
->>>>>>> Stashed changes
                         <form action="{{ route('player.add', $id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="title" value="{{ $title }}">
@@ -43,39 +37,7 @@
                                 <span><i class="fa-solid fa-play pr-2"></i>Play</span>
                             </button>
                         </form>
-<<<<<<< Updated upstream
 
-                            @if (Auth::user() != null)
-                            <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
-                            @if (!$isInWatchlist)
-                                <form action="{{ route('watchlist.add') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="title" value="{{ $title }}">
-                                    <input type="hidden" name="type" value="mv">
-                                    <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
-                                    <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
-                                    <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                                    <button type="submit" class="flex items-center">
-                                        <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
-                                        <span class="pl-3">Add to watchlist</span>
-                                    </button>
-                                </form>
-                                @else
-                                <form action="{{ route('watchlist.remove') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="title" value="{{ $title }}">
-                                    <input type="hidden" name="type" value="mv">
-                                    <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
-                                    <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
-                                    <input type="hidden" name="tmdb_id" value="{{ $id }}">
-                                    <button type="submit" class="flex items-center">
-                                        <i class="fa-solid fa-check"></i>
-                                        <span class="pl-3">Added to watchlist</span>
-                                    </button>
-                                </form>
-                                @endif
-                            </div>
-=======
                             @if (Auth::user() != null)
                                 <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                                 @if (!$isInWatchlist)
@@ -108,7 +70,6 @@
                                     </form>
                                     @endif
                                 </div>
->>>>>>> Stashed changes
                             @endif
                             <a class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold"
                             href="https://bitsearch.to/search?q={{ str_replace(' ', '+', $title) }}"

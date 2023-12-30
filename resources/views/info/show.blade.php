@@ -40,10 +40,7 @@
                                 <span><i class="fa-solid fa-play pr-2"></i>Play</span>
                             </button>
                         </form>
-<<<<<<< Updated upstream
-                        
-=======
->>>>>>> Stashed changes
+
                         @if (Auth::user() != null)
                             <div class="ml-5 inline-block bg-white text-black text-xl px-8 py-4 rounded-md mt-3 font-bold">
                                 @if (!$isInWatchlist)
@@ -54,12 +51,8 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
                                     <button type="submit" class="flex items-center">
-                                        <img src="/storage/images/watchlist.png" alt="Watchlist" class="w-6 h-6">
+                                        <i class="fa-solid fa-bookmark"></i>
                                         <span class="pl-3">Add to watchlist</span>
                                     </button>
                                 </form>
@@ -71,10 +64,6 @@
                                     <input type="hidden" name="imageurl" value="https://image.tmdb.org/t/p/original{{$backimage}}">
                                     <input type="hidden" name="logo_url" value="https://image.tmdb.org/t/p/original{{$logo}}">
                                     <input type="hidden" name="tmdb_id" value="{{ $id }}">
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
                                     <button type="submit" class="flex items-center">
                                         <i class="fa-solid fa-check"></i>
                                         <span class="pl-3">Added to watchlist</span>
