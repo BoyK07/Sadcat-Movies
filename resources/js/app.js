@@ -6,18 +6,19 @@ Alpine.start();
 
 document.addEventListener("DOMContentLoaded", function() {
     const images = document.querySelectorAll('img');
-    
+
     images.forEach(img => {
         // Create a wrapper for the image
         const wrapper = document.createElement('div');
         wrapper.className = 'aspect-3-2';
+        // Set a specific width for the wrapper (e.g., 300px)
 
         // Replace the image with the wrapper in the DOM
         img.parentNode.insertBefore(wrapper, img);
         wrapper.appendChild(img);
-        
+
         img.addEventListener('error', function() {
-            this.src = '/storage/images/imagenotfound.png';
+            this.src = '/img/placeholder.png';
         });
     });
 });
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check if the toast exists on page load
     const successToast = document.getElementById('toast-success');
     const dangerToast = document.getElementById('toast-danger');
-    
+
     // If the toast exists, display it and hide it after 5 seconds
     if (successToast) {
         showAndHideToast(successToast);
